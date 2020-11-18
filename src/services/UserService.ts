@@ -1,6 +1,8 @@
 import { getRepository, Repository } from 'typeorm';
 // models
 import User from '../models/User';
+// error
+import AppError from '../exceptions/AppError';
 
 interface CreateData {
   name: string;
@@ -35,7 +37,7 @@ class UserService {
     });
 
     if (userExists) {
-      throw new Error('O endereço de e-mail já existe');
+      throw new AppError('O endereço de e-mail já existe');
     }
 
     const user = this.userRepository.create({
